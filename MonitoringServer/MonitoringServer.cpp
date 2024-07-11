@@ -316,6 +316,7 @@ wstring MonitoringServer::Create_LogDbTable(SQL_TIMESTAMP_STRUCT  currentTime)
 		DebugBreak();
 #else
 		std::cout << "테이블 존재 여부 확인 쿼리 Execute 실패!!!" << std::endl;
+		m_DBConnPool->Push(dbConn);
 		return L"";
 #endif
 	}
@@ -328,6 +329,7 @@ wstring MonitoringServer::Create_LogDbTable(SQL_TIMESTAMP_STRUCT  currentTime)
 		DebugBreak();
 #else
 		std::cout << "테이블 존재 여부 확인 쿼리 전송 후 GetSQLData 실패 반환!!!" << std::endl;
+		m_DBConnPool->Push(dbConn);
 		return L"";
 #endif
 	}
@@ -360,6 +362,7 @@ wstring MonitoringServer::Create_LogDbTable(SQL_TIMESTAMP_STRUCT  currentTime)
 			DebugBreak();
 #else
 			std::cout << "새로운 테이블 생성 쿼리(월 별) Execute 실패!!!" << std::endl;
+			m_DBConnPool->Push(dbConn);
 			return L"";
 #endif
 		}
@@ -401,6 +404,7 @@ void MonitoringServer::Insert_LogDB(const wstring& tableName, SQL_TIMESTAMP_STRU
 		DebugBreak();
 #else
 		std::cout << "로그 행 삽입 쿼리 Execute 실패!!!" << std::endl;
+		m_DBConnPool->Push(dbConn);
 		return;
 #endif
 	}

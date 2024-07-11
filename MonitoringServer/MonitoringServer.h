@@ -48,7 +48,7 @@ private:
 public:
 	MonitoringServer(
 		int32 dbConnectionCnt, const WCHAR* odbcConnStr,
-		const char* serverIP, uint16 serverPort,
+		const char* serverIP, uint16 serverPort, uint16 maximumOfConnections,
 		BYTE packetCode_LAN, BYTE packetCode, BYTE packetSymmetricKey,
 		bool recvBufferingMode,
 		uint16 maximumOfSessions,
@@ -59,7 +59,7 @@ public:
 		uint32 sessionRecvBuffSize
 	)
 		: JNetServer(
-			serverIP, serverPort,
+			serverIP, serverPort, maximumOfConnections,
 			packetCode_LAN, packetCode, packetSymmetricKey,
 			recvBufferingMode,
 			maximumOfSessions,
