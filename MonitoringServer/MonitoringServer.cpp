@@ -289,7 +289,7 @@ void MonitoringServer::Send_MONT_DATA_TO_CLIENT() {
 }
 
 
-
+#if defined(CONNECT_TO_LOG_DB)
 wstring MonitoringServer::Create_LogDbTable(SQL_TIMESTAMP_STRUCT  currentTime)
 {
 	JNetDBConn* dbConn = m_DBConnPool->Pop();
@@ -417,6 +417,8 @@ void MonitoringServer::Insert_LogDB(const wstring& tableName, SQL_TIMESTAMP_STRU
 
 	m_DBConnPool->Push(dbConn);
 }
+#endif
+
 
 UINT __stdcall MonitoringServer::PerformanceCountFunc(void* arg)
 {
@@ -519,6 +521,8 @@ UINT __stdcall MonitoringServer::PerformanceCountFunc(void* arg)
 	return 0;
 }
 
+
+#if defined(CONNECT_TO_LOG_DB)
 UINT __stdcall MonitoringServer::LoggingToDbFunc(void* arg)
 {
 	MonitoringServer* montserver = (MonitoringServer*)arg;
@@ -621,3 +625,4 @@ UINT __stdcall MonitoringServer::LoggingToDbFunc(void* arg)
 
 	return 0;
 }
+#endif

@@ -1,0 +1,15 @@
+[submodule "Library/JNetLibrary"]
+	path = Library/JNetLibrary
+	url = https://github.com/JINs-software/JNetLibrary.git
+[submodule "Library/TlsMemoryPool"]
+	path = Library/TlsMemoryPool
+	url = https://github.com/JINs-software/TlsMemoryPool.git
+[submodule "Library/JBuffer"]
+	path = Library/JBuffer
+	url = https://github.com/JINs-software/JBuffer.git
+[submodule "Library/LockFree"]
+	path = Library/LockFree
+	url = https://github.com/JINs-software/LockFree.git
+[submodule "Library/PerformanceCounter"]
+	path = Library/PerformanceCounter
+	url = https://github.com/JINs-software/PerformanceCounter.git

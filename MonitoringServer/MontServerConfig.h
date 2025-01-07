@@ -6,8 +6,14 @@
 #define MONTSERVER_PROTOCOL_CODE					109
 #define MONTSERVER_PACKET_KEY						30
 
+//#define CONNECT_TO_LOG_DB
+#if defined(CONNECT_TO_LOG_DB)
 #define MONT_DB_CONN_COUNT							1
 #define MOND_ODBC_CONNECTION_STRING					L"Driver={MySQL ODBC 8.4 ANSI Driver};Server=127.0.0.1;Database=logdb;User=mainserver;Password=607281;Option=3;"
+#else
+#define MONT_DB_CONN_COUNT							0
+#define MOND_ODBC_CONNECTION_STRING					L""
+#endif
 																						// 10.0.1.2
 #define MONT_SERVER_IP								NULL
 #define MONT_SERVER_PORT							12121

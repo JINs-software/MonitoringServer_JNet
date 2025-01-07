@@ -75,7 +75,7 @@
     <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <ExternalIncludePath>$(SolutionDir)..\..\0. Utility\JNetLibrary\include;$(SolutionDir)..\..\0. Utility\MemoryPool\include;$(SolutionDir)..\..\0. Utility\RingBuffer\include;$(SolutionDir)..\..\0. Utility\LockFree\include;$(SolutionDir)..\..\0. Utility\PerformanceCounter\include;$(ExternalIncludePath)</ExternalIncludePath>
+    <ExternalIncludePath>$(SolutionDir)\Library\JNetLibrary\include;$(SolutionDir)\Library\TlsMemoryPool\include;$(SolutionDir)\Library\JBuffer\include;$(SolutionDir)\Library\LockFree\include;$(SolutionDir)\Library\PerformanceCounter\include;$(ExternalIncludePath)</ExternalIncludePath>
     <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -137,7 +137,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)..\..\0. Utility\RingBuffer\lib\$(Configuration)\RingBuffer.lib;$(SolutionDir)..\..\0. Utility\JNetLibrary\lib\$(Configuration)\JNetLibrary.lib;$(SolutionDir)..\..\0. Utility\LockFree\lib\$(Configuration)\LockFreeMemoryPool.lib;$(SolutionDir)..\..\0. Utility\PerformanceCounter\lib\$(Configuration)\PerformanceCounter.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)\Library\JNetLibrary\lib\$(Configuration)\JNetLibrary.lib;$(SolutionDir)\Library\LockFree\lib\$(Configuration)\LockFree.lib;$(SolutionDir)\Library\PerformanceCounter\lib\$(Configuration)\PerformanceCounter.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

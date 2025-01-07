@@ -40,8 +40,10 @@ private:
 	
 	HANDLE					m_MontThread;
 	
+#if defined(CONNECT_TO_LOG_DB)
 	JNetDBConnPool*			m_DBConnPool;
 	HANDLE					m_DbConnThread;
+#endif
 
 	bool					m_StopThreads;
 
@@ -64,15 +66,19 @@ public:
 			recvBufferingMode,
 			maximumOfSessions,
 			numOfIocpConcurrentThrd, numOfIocpWorkerThrd,
-			tlsMemPoolUnitCnt, tlsMemPoolUnitCapacity, tlsMemPoolMultiReferenceMode, tlsMemPoolPlacementNewMode,
-			memPoolBuffAllocSize, sessionRecvBuffSize
+			tlsMemPoolUnitCnt, tlsMemPoolUnitCapacity, 
+			memPoolBuffAllocSize, 
+			sessionRecvBuffSize,
+			false
 		),
 		m_LoginServerSession(0), m_EchoGameServerSession(0), m_ChatServerSession(0),
 		m_PerfCounter(NULL)
 
 	{
+#if defined(CONNECT_TO_LOG_DB)
 		m_DBConnPool = new JNetDBConnPool();
 		m_DBConnPool->Connect(dbConnectionCnt, odbcConnStr);
+#endif
 
 		memset(m_MontClientSessions, 0, sizeof(m_MontClientSessions));
 		for (BYTE i = 0; i < dfMAX_NUM_OF_MONT_CLIENT_TOOL; i++) {
@@ -100,11 +106,14 @@ public:
 
 		m_StopThreads = false;
 
+#if defined(CONNECT_TO_LOG_DB)
 		// DB 스레드
 		m_DbConnThread = (HANDLE)_beginthreadex(NULL, 0, LoggingToDbFunc, this, 0, NULL);
 		if (m_DbConnThread == INVALID_HANDLE_VALUE) {
 			return false;
 		}
+#endif
+
 		// 모니터링 서버 스레드
 		m_MontThread = (HANDLE)_beginthreadex(NULL, 0, PerformanceCountFunc, this, 0, NULL);
 		if (m_MontThread == INVALID_HANDLE_VALUE) {
@@ -160,10 +169,15 @@ public:
 
 	void Send_MONT_DATA_TO_CLIENT();
 
+#if defined(CONNECT_TO_LOG_DB)
 	wstring Create_LogDbTable(SQL_TIMESTAMP_STRUCT  currentTime);
 	void Insert_LogDB(const wstring& tableName, SQL_TIMESTAMP_STRUCT  currentTime, int serverNo, int type, int dataAvr, int dataMin, int dataMax);
+#endif
 
 	static UINT __stdcall PerformanceCountFunc(void* arg);
+
+#if defined(CONNECT_TO_LOG_DB)
 	static UINT __stdcall LoggingToDbFunc(void* arg);
+#endif
 };
 
